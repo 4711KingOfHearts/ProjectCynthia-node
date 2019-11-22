@@ -1,7 +1,7 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 
-var server = app.listen(3000, () => {
+const server = app.listen(3000, () => {
 	console.log('server is running on port', server.address().port);
 });
 
@@ -17,18 +17,18 @@ async function main(){
   const SDClient = require('./SDClient');
   const SDBattle = require('./SDBattle');
 
-  var sdclient = new SDClient(SDClientConfig.username, 
+  let sdclient = new SDClient(SDClientConfig.username, 
                               SDClientConfig.password, 
                               SDClientConfig.ws_uri, 
                               SDClientConfig.login_uri);
-  var response = await sdclient.init();
-  var parsedBody = await sdclient.login(response);
-  var game = await sdclient.findgame(SDClientConfig.ladder, 
+  let response = await sdclient.init();
+  let parsedBody = await sdclient.login(response);
+  let game = await sdclient.findgame(SDClientConfig.ladder, 
                                      SDClientConfig.team);
 
-  var sdbattle = new SDBattle(game, sdclient);
+  let sdbattle = new SDBattle(game, sdclient);
   
-  var outcome = await sdbattle.battle();
+  let outcome = await sdbattle.battle();
 
 }
 

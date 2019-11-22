@@ -7,13 +7,37 @@ class SDClient {
     this.messages = [];
     this.initchallstr = null;
     this.clientid = null ;
-    this.challstr = null;
-    
+    this.challstr = null; 
 	}
 
+  //SDClient general process:
+  //
+  // 1) create the websocket
+  //
+  // 2) get the challenge string (challstr) that is
+  //    sent when we create the websocket
+  //
+  // 3) use the challstr to loging to the Showdown
+  //    website
+  // 
+  // 4) use the assertion in the reply from 3) to
+  //    complete logging in to the websocket
+  //
+  // 5) use the gamestate info from 4) to start
+  //    a game on Showdown, with gametype specified
+  //    from the config.
+
+
+  /**  
+   * Sets up the websocket we use for communications
+   * the websocket returns a challenge string when
+   * it is initialized; we need this to login
+   *
+   * @return {Promise} challstr - challstr used to login.
+   */
   init() {
-    var challstrPromise = new Promise( (resolve, reject) => {
-      var EventEmitter = require('events');
+    return new Promise( (resolve, reject) => {
+      let EventEmitter = require('events');
       this.events = new EventEmitter();
 
       this.request = require('request-promise-native');
@@ -42,9 +66,16 @@ class SDClient {
       }
     });
 
-    return challstrPromise;
   }
 
+  /**
+   * Uses the challstr to login to the Showdown website
+   * 
+   * @param {Array} - contains the client_id and challstr
+   *
+   * @return {Promise} parsedbody - JSON object containing
+   * the login POST response
+   */
   async login(response){
     console.log("LOGGING IN challstr: " + response);
     this.clientid = response[0];
@@ -71,14 +102,11 @@ class SDClient {
       "method" : "post",
       "uri" : this.login_uri,
       "form" : data
-//      "json" : true
     };
     console.log("POSTING: " + JSON.stringify(options) );
 
-//    return process.exit(0);
 
-    let loginresponse = await this.request(options);
-        
+    let loginresponse = await this.request(options);    
     let parsedbody = JSON.parse(loginresponse.slice(1));
       
     let message = ["/trn " + this.username + ",0," + parsedbody.assertion];
@@ -89,6 +117,14 @@ class SDClient {
     });
   }
 
+  /**
+   * Starts a Showdown game.
+   *
+   * @param {String} ladder - the type of game to start.
+   * @param {Object} team - contains the team to use for the game, null for games with no teams
+   *
+   * @return {Promise} game - contains info specific to the game started.
+   */
   findgame(ladder, team) {
     let message1 = ["/utm " + team];
     let message2 = ["/search " + ladder];
