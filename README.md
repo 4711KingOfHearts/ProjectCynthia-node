@@ -1,6 +1,6 @@
 # ProjectCynthia-node
 
-A bot that can play on Pokémon Showdown, implemented in JavaScript
+A bot that can play on Pokémon Showdown, implemented in JavaScript.
 
 ## Setup/installation
 
