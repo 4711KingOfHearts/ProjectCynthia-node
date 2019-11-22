@@ -1,0 +1,8 @@
+{
+  //Copy this to local.json and fill in the values
+
+  "SDClientConfig" : {
+    "username" : "",
+    "password" : ""
+  }
+}

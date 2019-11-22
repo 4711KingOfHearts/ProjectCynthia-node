@@ -1,0 +1,19 @@
+{
+  "name": "projectcynthia-node",
+  "version": "1.0.0",
+  "description": "A bot to play games on Pokemon Showdown",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Frank Hallstrom",
+  "license": "ISC",
+  "dependencies": {
+    "config": "^3.2.4",
+    "express": "^4.17.1",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.8",
+    "socket.io": "^2.3.0",
+    "ws": "^7.2.0"
+  }
+}

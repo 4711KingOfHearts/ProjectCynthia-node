@@ -1,0 +1,13 @@
+{
+  "SDClientConfig" : {
+    "login_uri" : "https://play.pokemonshowdown.com/action.php",
+    "ws_uri" : "ws://sim.smogon.com:8000/showdown/websocket",
+//    "ws_uri" : "wss://sim.smogon.com/showdown/websocket",
+    "ladder" : "gen7randombattle"
+  },
+  "CynthiaConfig" : {
+    "engine" : "random"
+  },
+  "team" : null
+}
+
