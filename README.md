@@ -4,6 +4,8 @@ A bot that can play on Pokémon Showdown, implemented in JavaScript.
 
 ## Setup/installation
 
+ProjectCynthia requires a working Node.js environment.
+
 Clone the repository with: `https://github.com/4711KingOfHearts/ProjectCynthia.git`
 
 Install the npm modules with: `npm install`
